@@ -181,30 +181,46 @@ class Schedule(ft.Column):
         is_odd = dt.isocalendar()[1]%2 == 1
         week_values = ft.Column()
         week_strings = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота']
+
+        global week_odd_state
+        week_odd_state = not is_odd
         
         def updateweekodd(e):
-            new_odd = week_switch.value
-            week_switch.label = '  Нечетная неделя' if new_odd else '  Четная неделя'
+            global week_odd_state
+            week_odd_state = not week_odd_state
+            week_switch_odd.selected = week_odd_state
+            week_switch_even.selected = not week_odd_state
             week_values.controls = [
                 ft.Column([
                     ft.Text('', size=5),
                     ft.Text(w, size=25),
-                    generateday(i, new_odd),
+                    generateday(i, week_odd_state),
                 ], spacing=0)
                 for i, w in enumerate(week_strings)
             ]
             try: page.update()
             except: pass
-            
-        week_switch = ft.Switch('  Нечетная неделя' if is_odd else '  Четная неделя', value=is_odd, on_change=updateweekodd)
+        
+       
+        week_switch_odd = ft.Chip(label=ft.Text('Нечетная'), selected=is_odd, on_click=updateweekodd)
+        week_switch_even = ft.Chip(label=ft.Text('Четная'), selected=not is_odd, on_click=updateweekodd)
+        week_switch = ft.Row([
+            week_switch_odd,
+            week_switch_even,
+        ])
         updateweekodd(None)
 
         self.tabs = ft.Tabs(
                 tabs = [
                     # ft.Tab('dbg', ft.Text('123445')),
                     ft.Tab('Сегодня', generateday(dt.weekday(), is_odd)),
-                    ft.Tab('Завтра', generateday((dt.weekday()+1)%7, is_odd)),
-                    ft.Tab('На неделю', ft.Column([ft.Text('', size=5), week_switch, week_values], expand=True, scroll=ft.ScrollMode.AUTO)),
+                    ft.Tab('Завтра', generateday((dt.weekday()+1)%7, is_odd if dt.weekday() != 6 else not is_odd)),
+                    ft.Tab('На неделю', ft.Column([
+                        ft.Text('', size=5), 
+                        ft.Text('Текущая неделя выбрана автоматически', size=13, color=ft.Colors.SECONDARY), 
+                        week_switch, 
+                        week_values,
+                    ], expand=True, scroll=ft.ScrollMode.AUTO)),
                 ],
                 # scrollable=False,
                 selected_index=0,
