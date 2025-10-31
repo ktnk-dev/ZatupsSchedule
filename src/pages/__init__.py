@@ -22,15 +22,21 @@ class Navigator:
     @staticmethod
     def build(root: ft.Page) -> None:
         root.clean()
-        safe = ft.SafeArea(content=ft.Container(), expand=True, maintain_bottom_view_padding=False)
+        safe = ft.SafeArea(
+            content=ft.AnimatedSwitcher(
+                ft.Container(),
+                transition=ft.AnimatedSwitcherTransition.FADE,
+                duration=150,
+            ), 
+            expand=True, 
+            maintain_bottom_view_padding=False
+        )
         
-        
-        
-            
         def change(e: ft.ControlEvent):
+            safe.content.content.clean()
             tm = time()
             def throw(data: ft.Control): 
-                safe.content = data
+                safe.content.content = data
                 # safe.update()
                 root.update()
                 print(f'Switched to "{_PAGES[int(e.data)].label}" in {int((time()-tm)*1000)}ms')#type: ignore
@@ -47,7 +53,7 @@ class Navigator:
             ],
             on_change=change
         )
-        def _(q): safe.content = q
+        def _(q): safe.content.content = q
         _PAGES[0].handler(root, _)
         root.add(safe)
         root.update()
