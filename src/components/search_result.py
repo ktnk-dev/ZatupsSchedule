@@ -27,7 +27,8 @@ class SearchResult(ft.Container):
                         expand=True,
                         padding=ft.Padding(15, 15, 15, 15)
                     ),
-                    is_scroll_controlled=True
+                    is_scroll_controlled=True,
+                    on_dismiss=lambda _: (page.close(bs), page.remove(bs)),
                 )
                 sc.closefn(bs)
                 page.add(bs)

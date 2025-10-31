@@ -33,10 +33,10 @@ class Navigator:
         )
         
         def change(e: ft.ControlEvent):
-            safe.content.content.clean()
+            safe.content.content.clean() #type: ignore | always exist
             tm = time()
             def throw(data: ft.Control): 
-                safe.content.content = data
+                safe.content.content = data #type: ignore | always exist
                 # safe.update()
                 root.update()
                 print(f'Switched to "{_PAGES[int(e.data)].label}" in {int((time()-tm)*1000)}ms')#type: ignore
@@ -53,7 +53,7 @@ class Navigator:
             ],
             on_change=change
         )
-        def _(q): safe.content.content = q
+        def _(q): safe.content.content = q #type: ignore | always exist
         _PAGES[0].handler(root, _)
         root.add(safe)
         root.update()

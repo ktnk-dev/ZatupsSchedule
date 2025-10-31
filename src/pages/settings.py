@@ -26,7 +26,7 @@ def updater(page: ft.Page):
         content=ft.Row([
             ft.Text("Во время обновления приложение будет недоступно. Расписание не всегда доступно, имейте ввиду. Это может занять до 2 минут"),
             # ft.Container(height=3),
-            ft.Text(f"Последнее обновление {(datetime.now()-datetime.strptime(page.client_storage.get('date'), '%d/%m/%Y, %H:%M:%S')).days} дн. назад", size=13, color=ft.Colors.SECONDARY),
+            ft.Text(f"Последнее обновление {(datetime.now()-datetime.strptime(page.client_storage.get('date'), '%d/%m/%Y, %H:%M:%S')).days} дн. назад", size=13, color=ft.Colors.SECONDARY), #type: ignore | always exist
         ], wrap=True),
         actions=[
             ft.TextButton("Отменить", on_click=lambda _: page.close(banner)),
@@ -95,7 +95,7 @@ def settingspage(page: ft.Page, throw):
         ft.Container(height=0),
         timeout_switch,
         ft.FilledButton('Обновить расписание сейчас', on_click=lambda _: updater(page)),
-        ft.Text(f"Последнее обновление {(datetime.now()-datetime.strptime(page.client_storage.get('date'), '%d/%m/%Y, %H:%M:%S')).days} дн. назад", size=13, color=ft.Colors.SECONDARY),
+        ft.Text(f"Последнее обновление {(datetime.now()-datetime.strptime(page.client_storage.get('date'), '%d/%m/%Y, %H:%M:%S')).days} дн. назад", size=13, color=ft.Colors.SECONDARY), #type: ignore | always exist
     ]))
     
 

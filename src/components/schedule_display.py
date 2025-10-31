@@ -77,6 +77,7 @@ class Schedule(ft.Column):
                 self.um(e)
                 
                 
+                
             self.controls.append(
                 ft.Column([
                     ft.Row(
@@ -121,6 +122,7 @@ class Schedule(ft.Column):
                             is_scroll_controlled=True,
                             enable_drag=True,
                             use_safe_area=True,
+                            on_dismiss=lambda _: (page.close(bs), page.remove(bs)),
                         )
                         sc.closefn(bs)
                         page.add(bs)
@@ -230,5 +232,5 @@ class Schedule(ft.Column):
         
         self.controls.append(self.tabs)
     def closefn(self, component):
-        self.um = lambda _: self.page.close(component) #type: ignore
+        self.um = lambda _: (self.page.close(component), self.page.remove(component)) #type: ignore
         
