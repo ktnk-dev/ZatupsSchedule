@@ -232,5 +232,12 @@ class Schedule(ft.Column):
         
         self.controls.append(self.tabs)
     def closefn(self, component):
-        self.um = lambda _: (self.page.close(component), self.page.remove(component)) #type: ignore
+        def _(e):
+            preserve = self.page
+            preserve.close(component) #type: ignore | always exist
+            sleep(.1)
+            try: preserve.remove(component) #type: ignore | always exist
+            except: ... # if component removed before timer
+        
+        self.um = _
         
