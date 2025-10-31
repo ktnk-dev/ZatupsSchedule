@@ -1,0 +1,36 @@
+[project]
+name = "main"
+version = "0.1.7"
+description = ""
+readme = "README.md"
+requires-python = ">=3.9"
+authors = [
+    { name = "Sinya", email = "you@example.com" }
+]
+dependencies = [
+  "datetime>=5.5",
+  "flet==0.28.3",
+  "httpx>=0.28.1",
+  "pydantic>=2.12.3",
+]
+
+[tool.flet]
+org = "ru.sinya.kv2_schedule"
+product = "Расписание"
+company = "Sinya"
+copyright = "Copyright (C) 2025 by Sinya"
+assets = "assets" 
+
+[tool.flet.app]
+path = "src"
+
+[tool.uv]
+dev-dependencies = [
+    "flet[all]==0.28.3",
+]
+
+[tool.poetry]
+package-mode = false
+
+[tool.poetry.group.dev.dependencies]
+flet = {extras = ["all"], version = "0.28.3"}
