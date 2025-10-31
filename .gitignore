@@ -165,3 +165,4 @@ storage/
 # Iternal
 src/config.py
 vm.bat
+media/_*
