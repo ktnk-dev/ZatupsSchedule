@@ -13,6 +13,9 @@ class SearchResult(ft.Container):
             'groups': ft.Icons.GROUP
         }
         
+        self.expand = True
+        self.margin = ft.Margin(0, 10, 0, 0)
+        
         def click(data: dict[str, Any], data_type: Literal['teachers', 'rooms', 'groups']):
             def handle(e): 
                 sc = Schedule(
@@ -25,9 +28,11 @@ class SearchResult(ft.Container):
                     ft.Container(
                         sc,
                         expand=True,
-                        padding=ft.Padding(15, 15, 15, 15)
+                        padding=15
                     ),
                     is_scroll_controlled=True,
+                    enable_drag=True,
+                    use_safe_area=True,
                     on_dismiss=lambda _: (page.close(bs), page.remove(bs)),
                 )
                 sc.closefn(bs)
@@ -35,8 +40,7 @@ class SearchResult(ft.Container):
                 page.open(bs)
             
             return handle
-        self.expand = True
-        self.margin = ft.Margin(0, 10, 0, 0)
+        
         self.content = ft.Column([
             ft.Container(
                 ft.Row(
@@ -48,8 +52,7 @@ class SearchResult(ft.Container):
                                     if data_type == 'teachers' \
                                 else f"{_['name']}",
                                 color=ft.Colors.SECONDARY
-                            ),
-                            
+                            ),  
                         )
                     ],
                     expand=True,                  

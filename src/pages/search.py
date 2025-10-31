@@ -39,26 +39,19 @@ def current(page: ft.Page, throw):
         page.update()
     
     query = ft.SearchBar(
-        # label='Поиск',
         bar_hint_text='Введи группу, аудиторию или ФИО',
-        # border=ft.InputBorder.UNDERLINE,
-        # filled=False,
-        # expand=True,
         on_change=search
     )
     groups_tab = ft.Tab(
         text='Группы',
-        # icon=ft.Icon(ft.Icons.GROUP),
         visible=False,
     )
     rooms_tab = ft.Tab(
         text='Аудитории',
-        # icon=ft.Icon(ft.Icons.ROOM),
         visible=False,
     )
     teachers_tab = ft.Tab(
         text='Преподаватели',
-        # icon=ft.Icon(ft.Icons.SCHOOL),
         visible=False,
     )
     throw(ft.Column(
