@@ -68,7 +68,8 @@ def current_schedule(page: ft.Page, throw):
     def resolveSchedule():  
         a = page.client_storage.get('active')
         if not a: return
-        db = Storage.extract(a[0].strip()).model_dump()[a[1]]
+        try: db = Storage.extract(a[0].strip()).model_dump()[a[1]]
+        except: updater(page)
         print(a[0], Storage.extract(a[0]))
         c_schedule.content = ft.Text('Не удалось найти расписание. Попробуйте пересохранить расписание или обновите данные', color=ft.Colors.ERROR, size=17) \
             if not len(db) else Schedule(page, db[0], a[1], True)

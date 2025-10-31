@@ -12,6 +12,7 @@ class NavigatorPage(BaseModel):
     position: int
     
 _PAGES: list[NavigatorPage] = []
+_ACTIVE_PAGE: int = -1
 
 class Navigator:
     @staticmethod
@@ -33,6 +34,9 @@ class Navigator:
         )
         
         def change(e: ft.ControlEvent):
+            global _ACTIVE_PAGE
+            if _ACTIVE_PAGE == int(e.data): return
+            _ACTIVE_PAGE = int(e.data)
             safe.content.content.clean() #type: ignore | always exist
             tm = time()
             def throw(data: ft.Control): 

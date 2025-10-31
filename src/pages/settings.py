@@ -6,7 +6,7 @@ from . import Navigator, NavigatorPage, setup
 
 from api import TIMEOUT
 
-def updater(page: ft.Page):
+def updater(page: ft.Page, force: bool = False):
     def update(e):
         try: page.client_storage.set('date', False)
         except: pass
@@ -29,9 +29,10 @@ def updater(page: ft.Page):
             ft.Text(f"Последнее обновление {(datetime.now()-datetime.strptime(page.client_storage.get('date'), '%d/%m/%Y, %H:%M:%S')).days} дн. назад", size=13, color=ft.Colors.SECONDARY), #type: ignore | always exist
         ], wrap=True),
         actions=[
-            ft.TextButton("Отменить", on_click=lambda _: page.close(banner)),
+            ft.TextButton("Отменить", on_click=lambda _: page.close(banner)) if not force else ft.Container(),
             ft.FilledButton("Обновить", on_click=lambda _: (page.close(banner), update(None)), bgcolor=ft.Colors.RED),
         ],
+        dismissable=not force
     )
     page.add(banner)
     page.open(banner)
