@@ -96,6 +96,8 @@ def current_schedule(page: ft.Page, throw):
         controls=drawer_root+drawer_icons, on_change=change, selected_index=list_saved.index(active) if active else 0
     )
     selected = ft.Text(active[0] if active else 'Выбери расписание', size=18, color=ft.Colors.SECONDARY)
+    if not active:
+        c_schedule.content = ft.Text('Расписания можно найти во вкладке "Поиск", введя в поисковую строку название группы, номер аудитории или ФИО преподавателя', size=19)
     
     def openDrawer(e):
         global drawer_icons, list_saved

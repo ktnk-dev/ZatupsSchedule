@@ -6,7 +6,7 @@ from . import Navigator, NavigatorPage, setup
 
 from api import TIMEOUT
 
-def updater(page: ft.Page, force: bool = False):
+def updater(page: ft.Page):
     def update(e):
         try: page.client_storage.set('date', False)
         except: pass
@@ -17,7 +17,7 @@ def updater(page: ft.Page, force: bool = False):
         sleep(.1)
         page.clean()
         sleep(.1)
-        setup.login(page)
+        setup.login(page, True)
         setup.navigator(page)
         
     banner = ft.AlertDialog(
@@ -29,10 +29,10 @@ def updater(page: ft.Page, force: bool = False):
             ft.Text(f"Последнее обновление {(datetime.now()-datetime.strptime(page.client_storage.get('date'), '%d/%m/%Y, %H:%M:%S')).days} дн. назад", size=13, color=ft.Colors.SECONDARY), #type: ignore | always exist
         ], wrap=True),
         actions=[
-            ft.TextButton("Отменить", on_click=lambda _: page.close(banner)) if not force else ft.Container(),
+            ft.TextButton("Отменить", on_click=lambda _: page.close(banner)),
             ft.FilledButton("Обновить", on_click=lambda _: (page.close(banner), update(None)), bgcolor=ft.Colors.RED),
         ],
-        on_dismiss=lambda _: page.remove(banner)
+        on_dismiss=lambda _: (page.close(banner), page.remove(banner))
     )
     page.add(banner)
     page.open(banner)
