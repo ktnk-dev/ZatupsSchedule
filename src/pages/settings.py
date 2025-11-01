@@ -32,7 +32,7 @@ def updater(page: ft.Page, force: bool = False):
             ft.TextButton("Отменить", on_click=lambda _: page.close(banner)) if not force else ft.Container(),
             ft.FilledButton("Обновить", on_click=lambda _: (page.close(banner), update(None)), bgcolor=ft.Colors.RED),
         ],
-        dismissable=not force
+        on_dismiss=lambda _: page.remove(banner)
     )
     page.add(banner)
     page.open(banner)
