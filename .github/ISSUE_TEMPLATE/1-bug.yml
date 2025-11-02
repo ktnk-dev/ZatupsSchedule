@@ -1,16 +1,7 @@
 name: Проблема/баг в приложении
 description: Если вы обнаружили проблему, этот пункт для вас
-title: "[Issue]: "
+title: "[Ошибка]: "
 body:
-  - type: input
-    id: what-happened
-    attributes:
-      label: Что произошло?
-      description: Укажи краткое описание проблемы
-      placeholder: Например - не работает переключение вкладок
-    validations:
-      required: true
-
   - type: input
     id: device
     attributes:

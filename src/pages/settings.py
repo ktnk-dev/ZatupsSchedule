@@ -97,9 +97,15 @@ def settingspage(page: ft.Page, throw):
         timeout_switch,
         ft.FilledButton('Обновить расписание сейчас', on_click=lambda _: updater(page)),
         ft.Text(f"Последнее обновление {(datetime.now()-datetime.strptime(page.client_storage.get('date'), '%d/%m/%Y, %H:%M:%S')).days} дн. назад", size=13, color=ft.Colors.SECONDARY), #type: ignore | always exist
+        ft.Container(height=10),
+        ft.Text('Другое', size=20),
+        ft.Row([
+            ft.FilledButton('Исходный код', on_click=lambda _: page.launch_url('https://github.com/ktnk-dev/ZatupsSchedule')),
+            ft.FilledButton('Сообщить об ошибке', on_click=lambda _: page.launch_url('https://github.com/ktnk-dev/ZatupsSchedule/issues/new')),
+        ])
     ]))
     
-
+# https://github.com/ktnk-dev/ZatupsSchedule/issues/new
 
 Navigator.add(
     NavigatorPage(
