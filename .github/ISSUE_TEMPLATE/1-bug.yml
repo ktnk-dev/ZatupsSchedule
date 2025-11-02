@@ -1,0 +1,45 @@
+name: Проблема/баг в приложении
+description: Если вы обнаружили проблему, этот пункт для вас
+title: "[Issue]: "
+body:
+  - type: input
+    id: what-happened
+    attributes:
+      label: Что произошло?
+      description: Укажи краткое описание проблемы
+      placeholder: Например: не работает переключение вкладок
+    validations:
+      required: true
+
+  - type: input
+    id: device
+    attributes:
+      label: Устройство
+      description: Укажи свое устройство и операционную систему
+      placeholder: Например: Samsung S24 на Android 14
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Подробнее о проблеме
+      description: Укажи, как вызвать эту проблему пошагово, желательно добавь скриншот или запись экрана
+      placeholder: |
+        Например:
+        1. Удалить все сохраненные расписания
+        2. Перключиться на "Поиск"
+        3. Вернуться на "Расписание"
+        4. Все взорвется
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: is_latest
+    attributes:
+      label: 
+      options:
+        - label: Подтверждаю, что использую последнюю версию приложения
+          required: true
+        - label: Подтверждаю, что похожей ошибки уже нет
+          required: true
