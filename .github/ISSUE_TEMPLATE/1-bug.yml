@@ -37,9 +37,9 @@ body:
   - type: checkboxes
     id: is_latest
     attributes:
-      label: 
+      label: Я подтверждаю, что...
       options:
-        - label: Подтверждаю, что использую последнюю версию приложения
+        - label: Использую последнюю версию приложения
           required: true
-        - label: Подтверждаю, что похожей ошибки уже нет
+        - label: Похожей ошибки нет
           required: true
