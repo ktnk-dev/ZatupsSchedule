@@ -7,7 +7,7 @@ body:
     attributes:
       label: Что произошло?
       description: Укажи краткое описание проблемы
-      placeholder: Например: не работает переключение вкладок
+      placeholder: Например - не работает переключение вкладок
     validations:
       required: true
 
@@ -16,7 +16,7 @@ body:
     attributes:
       label: Устройство
       description: Укажи свое устройство и операционную систему
-      placeholder: Например: Samsung S24 на Android 14
+      placeholder: Например - Samsung S24 на Android 14
     validations:
       required: true
 
@@ -26,7 +26,7 @@ body:
       label: Подробнее о проблеме
       description: Укажи, как вызвать эту проблему пошагово, желательно добавь скриншот или запись экрана
       placeholder: |
-        Например:
+        Например
         1. Удалить все сохраненные расписания
         2. Перключиться на "Поиск"
         3. Вернуться на "Расписание"
