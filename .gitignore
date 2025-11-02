@@ -166,3 +166,4 @@ storage/
 src/config.py
 vm.bat
 media/_*
+.github-issues
