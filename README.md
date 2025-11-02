@@ -1,4 +1,5 @@
 ![](./media/banner.png)
+[`Скачать`](https://github.com/ktnk-dev/ZatupsSchedule/releases/latest) [`Сообщить об ошибке`](https://github.com/ktnk-dev/ZatupsSchedule/issues/new)
 
 ## Что это за проект
 - Кроссплатформенное приложение нацелено на удобный доступ к расписанию вуза
