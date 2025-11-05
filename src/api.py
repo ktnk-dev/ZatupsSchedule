@@ -44,8 +44,15 @@ def cache(token: str) -> list[float]: #type: ignore
             out.append(data)
     
     Storage.set(out)
-
-
+    
+    
+def app_update_required() -> tuple[bool, str]:
+    req = httpx.get(REPO_URL.replace('github.com', 'api.github.com/repos') + '/releases')
+    origin = req.json()[0]
+    required = VERSION != origin['tag_name']
+    text = origin['body'] if required else ''
+    return (required, text)
+    
     
 
 

@@ -13,6 +13,7 @@ def main(page: ft.Page):
     settings.settheme(page, None)
     setup.login(page)
     setup.navigator(page)
+    setup.app_update_check(page)
     
 ft.app(main)
 

@@ -4,7 +4,7 @@ from datetime import datetime
 
 from . import Navigator, NavigatorPage, setup
 
-from api import TIMEOUT
+from config import REPO_URL, VERSION, TIMEOUT
 
 def updater(page: ft.Page):
     def update(e):
@@ -100,12 +100,13 @@ def settingspage(page: ft.Page, throw):
         ft.Container(height=10),
         ft.Text('Другое', size=20),
         ft.Row([
-            ft.FilledButton('Исходный код', on_click=lambda _: page.launch_url('https://github.com/ktnk-dev/ZatupsSchedule')),
-            ft.FilledButton('Сообщить об ошибке', on_click=lambda _: page.launch_url('https://github.com/ktnk-dev/ZatupsSchedule/issues/new')),
-        ])
+            ft.FilledButton('Исходный код', on_click=lambda _: page.launch_url(f'{REPO_URL}')),
+            ft.FilledButton('Сообщить об ошибке', on_click=lambda _: page.launch_url(f'{REPO_URL}/issues/new')),
+        ]),
+        ft.Text(f'Версия {VERSION}\nПод лицензией GNU GPL v3', size=13, color=ft.Colors.SECONDARY),
     ]))
     
-# https://github.com/ktnk-dev/ZatupsSchedule/issues/new
+# {REPO_URL}/issues/new
 
 Navigator.add(
     NavigatorPage(

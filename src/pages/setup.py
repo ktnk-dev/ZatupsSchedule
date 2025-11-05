@@ -7,6 +7,32 @@ from storage import Storage
 from pages import Navigator
 from components.spinner import spinner_fulscreen
 
+from config import REPO_URL
+
+def app_update_check(page: ft.Page):
+    required, text = api.app_update_required()
+    if not required: return
+    
+    def action(update: bool = False):
+        def h(_):
+            page.close(banner)
+            if update: page.launch_url(REPO_URL+'/releases/latest')
+        return h
+    
+    banner = ft.Banner(
+        # bgcolor=ft.Colors.SECONDARY_CONTAINER,
+        leading=ft.Icon(ft.Icons.UPDATE, color=ft.Colors.SECONDARY),
+        content=ft.Text(f'Доступно новое{" критическое" if "critical" in text else ""} обновление', color=ft.Colors.SECONDARY, size=15),
+        actions=[
+            ft.TextButton("Закрыть", on_click=action()),
+            ft.OutlinedButton("Обновить", on_click=action(True)),
+        ]
+    )
+    
+    page.add(banner)
+    page.open(banner)
+
+
 def login(page: ft.Page, force_update_condition: bool = False):
     Storage.get() #! init
     page.vertical_alignment = ft.MainAxisAlignment.CENTER    
