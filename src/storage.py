@@ -14,7 +14,6 @@ class Extract(BaseModel):
     lessons: list[dict]
     
     
-    
 class Storage:
     @staticmethod
     def get():
@@ -45,5 +44,3 @@ class Storage:
             rooms = data[2] if not query else list(filter(None, [_ if query.lower() in _['name'].lower() else False for _ in data[2]])), #type: ignore
             lessons = data[3] if not query else list(filter(None, [_ if query in _['teacher_ids'] or query in _['room_ids'] or query in _['group_ids'] else False for _ in data[3]])) #type: ignore
         )
-    
-   

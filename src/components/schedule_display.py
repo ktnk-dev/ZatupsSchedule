@@ -129,7 +129,7 @@ class Schedule(ft.Column):
                         page.open(bs)
                         
                     return handle
-                        
+                def Button(*a, **k): return ft.FilledButton(*a, **k, style=ft.ButtonStyle(shape=ft.RoundedRectangleBorder(radius=10)), scale=.9)
                 def gentime(): return f"{d['time_start']//60}:{d['time_start']%60:0>2}"
                 empty = None
                 return ft.Container(
@@ -142,7 +142,7 @@ class Schedule(ft.Column):
                         ft.Text('Аудитории', color=ft.Colors.SECONDARY, size=13) if len(d['rooms']) and data_type != 'rooms' else empty,
                         ft.Text('', size=2) if len(d['rooms']) and data_type != 'rooms' else empty,
                         ft.Row([
-                            ft.FilledButton(_['name'], scale=.9, on_click=openself(_, 'rooms'))
+                            Button(_['name'], on_click=openself(_, 'rooms'))
                             for _ in d['rooms']
                         ], spacing=2, wrap=True) if len(d['rooms']) and data_type != 'rooms' else empty,
                         # ft.Text('', size=5) if len(d['rooms']) and data_type != 'rooms' else empty,
@@ -152,7 +152,7 @@ class Schedule(ft.Column):
                         ft.Text('Группы', color=ft.Colors.SECONDARY, size=13) if len(d['groups']) and data_type != 'groups' else empty,
                         ft.Text('', size=2) if len(d['groups']) and data_type != 'groups' else empty,
                         ft.Row([
-                            ft.FilledButton(_['name'], scale=.9, on_click=openself(_, 'groups'))
+                            Button(_['name'], on_click=openself(_, 'groups'))
                             for _ in d['groups']
                         ], spacing=2, wrap=True) if len(d['groups']) and data_type != 'groups' else empty,
                         # ft.Text('', size=5) if len(d['groups']) and data_type != 'groups' else empty,
@@ -162,7 +162,7 @@ class Schedule(ft.Column):
                         ft.Text('Преподаватели', color=ft.Colors.SECONDARY, size=13) if len(d['teachers']) and data_type != 'teachers' else empty,
                         ft.Text('', size=2) if len(d['teachers']) and data_type != 'teachers' else empty,
                         ft.Row([
-                            ft.FilledButton(f"{_['second_name']} {_['first_name'][0]}. {_['sur_name'][0]}.", scale=.9, on_click=openself(_, 'teachers'))
+                            Button(f"{_['second_name']} {_['first_name'][0]}. {_['sur_name'][0]}.", on_click=openself(_, 'teachers'))
                             for _ in d['teachers']
                         ], spacing=0, wrap=True) if len(d['teachers']) and data_type != 'teachers' else empty,
                         

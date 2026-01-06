@@ -10,6 +10,7 @@ from pages import (
 def main(page: ft.Page):
     page.title = 'Расписание'
     page.spacing = 0
+    settings.setthemevariant(page)
     settings.settheme(page, None)
     setup.login(page)
     setup.navigator(page)
