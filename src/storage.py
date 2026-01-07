@@ -1,19 +1,32 @@
 import os
 import json
 
-from pydantic import BaseModel
+# from pydantic import BaseModel
 
 DATA_PATH = os.getenv("FLET_APP_STORAGE_DATA")
 LOADED = []
 
 
-class Extract(BaseModel):
+class Extract():
     teachers: list[dict]
     groups: list[dict]
     rooms: list[dict]
     lessons: list[dict]
     
+    def __init__(self, teachers, groups, rooms, lessons) -> None:
+        self.teachers = teachers
+        self.groups = groups
+        self.rooms = rooms
+        self.lessons = lessons
     
+    def model_dump(self):
+        return {
+            'teachers': self.teachers,
+            'groups': self.groups,
+            'rooms': self.rooms,
+            'lessons': self.lessons
+        }
+
 class Storage:
     @staticmethod
     def get():

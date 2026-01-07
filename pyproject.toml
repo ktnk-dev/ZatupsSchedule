@@ -11,7 +11,6 @@ dependencies = [
   "datetime>=5.5",
   "flet==0.28.3",
   "httpx>=0.28.1",
-  "pydantic>=2.12.3",
 ]
 
 [tool.flet]
