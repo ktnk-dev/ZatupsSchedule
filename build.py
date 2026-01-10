@@ -6,7 +6,7 @@ import time
 BASE = 'flet build'
 ARGS = '-v'
 TARGET = [
-    'apk',
+    'apk --flutter-build-args="--target-platform=android-arm64" --flutter-build-args="--target-platform=android-arm"',
     # 'web'
 ]
 
@@ -19,4 +19,4 @@ for target in TARGET:
     if target == 'apk' and sys.platform == 'win32':
         os.system(f'{ADB} install build\\apk\\app-release.apk')
 _end = time.perf_counter()
-print(f'\n\nBuilded in {_end-_start}s')
+print(f'\n\nBuilded in {int(_end-_start)}s')
