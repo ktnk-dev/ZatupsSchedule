@@ -10,6 +10,11 @@ from pages import (
 def main(page: ft.Page):
     page.title = 'Расписание'
     page.spacing = 0
+    #page.padding = 0
+
+    if not page.client_storage.get('theme_variant'):
+        page.client_storage.set('theme_variant', 'auto')
+    
     settings.setthemevariant(page)
     settings.settheme(page, None)
     setup.login(page)

@@ -1,5 +1,5 @@
 [project]
-name = "main"
+name = "buildv2"
 version = "0.3.0"
 description = ""
 readme = "README.md"
@@ -17,7 +17,7 @@ dependencies = [
 org = "ru.sinya.kv2_schedule"
 product = "Расписание"
 company = "Sinya"
-copyright = "Copyright (C) 2025 by Sinya"
+copyright = "Copyright (C) 2026 by Sinya"
 assets = "assets" 
 
 [tool.flet.app]

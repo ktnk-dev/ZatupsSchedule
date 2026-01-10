@@ -125,18 +125,39 @@ def settingspage(page: ft.Page, throw):
     )
     page.add(themevariantchangealert)
 
-    if not page.client_storage.get('theme_variant'):
-        page.client_storage.set('theme_variant', 'auto')
+    
+
+    themedropdown = ft.Dropdown(
+        text_align=ft.TextAlign.RIGHT,
+        border=ft.InputBorder.NONE,
+        #expand=True,
+        #filled=True,
+        #fill_color=ft.Colors.SECONDARY_CONTAINER,
+        bgcolor=ft.Colors.SECONDARY_CONTAINER,
+        border_radius=999,
+        options=[
+            ft.DropdownOption('auto', 'Системная тема'),
+            ft.DropdownOption('light', 'Светлая тема'),
+            ft.DropdownOption('dark', 'Темная тема'),
+            
+        ],
+        on_change=lambda e: setthemevariant(page, e.control.value), 
+        value=page.client_storage.get('theme_variant')
+    )
 
     throw(ft.Column([
-#         ft.Text('Настройки', size=20),
+        ft.Container(
+            ft.Text('Настройки', size=25),
+            padding=ft.Padding(5,5,5,0)
+        ),
         SettingsTitle('Кастомизация'),
         *SettingsContainer(
             Settings(
                 'Сменить тему',
                 'Выбери темную или светлую сторону',
                 leading=ft.Icon(ft.Icons.PALETTE),
-                on_click=lambda _: page.open(themevariantchangealert)
+                item=themedropdown,
+                on_click=None
             ),
             Settings(
                 'Сменить цвет',
@@ -177,7 +198,7 @@ def settingspage(page: ft.Page, throw):
             ),
         ),
         SettingsTitle(f'Версия {VERSION}'),
-    ], spacing=0))
+    ], spacing=0,scroll=ft.ScrollMode.AUTO))
     
     return
 # legacy menu    

@@ -10,6 +10,6 @@ TARGET = [
 
 os.system('uv sync')
 for target in TARGET:
-    os.system(f'uv run flet build {target}')
+    os.system(f'uv run flet build {target} -vv')
     if target == 'apk' and sys.platform == 'win32':
         os.system(f'{ADB} install build\\apk\\app-release.apk')

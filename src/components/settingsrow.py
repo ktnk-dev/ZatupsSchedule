@@ -1,11 +1,12 @@
 import flet as ft
+from typing import Any
 
 def Settings(
     title: str,
     subtitle: str,
     leading = None,
     on_click = None,
-    item = ft.Icon(ft.Icons.ARROW_RIGHT_ROUNDED, color=ft.Colors.SECONDARY)
+    item: Any = ft.Icon(ft.Icons.ARROW_RIGHT_ROUNDED, color=ft.Colors.SECONDARY)
 ) -> ft.Container:
     return ft.Container(
         ft.Row(
@@ -16,7 +17,7 @@ def Settings(
                     subtitle=ft.Text(subtitle),
                     expand=True
                 ),
-                item if on_click else ft.Container()
+                item #if on_click else ft.Container()
             ], vertical_alignment = ft.CrossAxisAlignment.CENTER
         ),
         on_click=on_click,

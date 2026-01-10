@@ -1,8 +1,7 @@
 from typing import Any
-from pydantic import BaseModel
 import flet as ft
 from time import time
-
+from components.selfdantic import BaseModel
 
 class NavigatorPage(BaseModel):
     label: str
