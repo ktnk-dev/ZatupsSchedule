@@ -1,7 +1,7 @@
 [project]
 name = "buildv2"
 version = "0.3.0"
-description = ""
+description = "Расписание ПГУПС"
 readme = "README.md"
 requires-python = ">=3.9"
 authors = [
