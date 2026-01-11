@@ -26,24 +26,27 @@ def cache(token: str) -> list[float]: #type: ignore
     ]
     out = []
     
-    for endpoint in enpoints:
+    for index, endpoint in enumerate(enpoints):
         chunks = []
         downloaded = 0
 
         with httpx.stream('get', f'{BASE_URL}/database/v1/{endpoint}/', headers={'token': token}) as w:
             total_size = int(w.headers.get('content-length', 0))
             
-            for chunk in w.iter_raw(chunk_size=8192):
+            for chunk in w.iter_raw(chunk_size=1024*16):
                 if not chunk: continue
                 chunks.append(chunk)
                 downloaded += len(chunk)
-                if endpoint == enpoints[-1]:
-                    yield (downloaded/total_size) #type: ignore
+                if index != 3:
+                    yield ((downloaded/total_size)+index)/3 /4 #type: ignore
+                else:
+                    yield min(0.99,((downloaded*0.75)/total_size)+0.25) #type: ignore
             
             data = json.loads(b''.join(chunks))
             out.append(data)
     
     Storage.set(out)
+    yield 1 #type: ignore
     
     
 def app_update_required() -> tuple[bool, str]:

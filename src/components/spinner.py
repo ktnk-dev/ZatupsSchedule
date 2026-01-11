@@ -4,9 +4,7 @@ from time import sleep
 from storage import Storage
 from datetime import datetime
 
-def spinner_fulscreen(page: ft.Page, *args):
-    restore = page.vertical_alignment.__copy__()
-    
+def spinner_fulscreen(page: ft.Page, *args):    
     def ignore_update(e):
         page.client_storage.set('date', datetime.now().strftime('%d/%m/%Y, %H:%M:%S'))
         def destroy(e):
@@ -38,7 +36,10 @@ def spinner_fulscreen(page: ft.Page, *args):
         ft.Container(
             ft.Row(
                 [ft.Column(
-                    [pb]+list(args)+[ft.Text('', size=15),ft.FilledButton('Пропустить', on_click=ignore_update, bgcolor=ft.Colors.ERROR) if len(Storage.get())>1 else ft.Text('', size=1)],
+                    [pb]+list(args)+[
+                        ft.Text('', size=15),
+                        ft.FilledButton('Пропустить', on_click=ignore_update, bgcolor=ft.Colors.ERROR) if len(Storage.get())>1 else ft.Text('', size=1)
+                    ],
                     horizontal_alignment=ft.CrossAxisAlignment.CENTER,
 
                     expand=1

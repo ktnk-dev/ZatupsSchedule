@@ -35,7 +35,8 @@ def app_update_check(page: ft.Page):
 
 
 def login(page: ft.Page, force_update_condition: bool = False):
-    Storage.get() #! init
+    database = Storage.get() 
+    print(len(database))
     page.vertical_alignment = ft.MainAxisAlignment.CENTER    
     # print(123, page.client_storage.get('date'))
     
@@ -47,6 +48,7 @@ def login(page: ft.Page, force_update_condition: bool = False):
         page.client_storage.set('date', datetime.now().strftime('%d/%m/%Y, %H:%M:%S'))
     
     if 0 \
+        or len(database) == 0 \
         or force_update_condition \
         or incorrect_date_condition \
         or (allowed_autoupdate_condition and timeout_condition) \
