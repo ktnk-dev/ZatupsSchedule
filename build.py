@@ -6,7 +6,7 @@ import time
 BASE = 'flet build'
 ARGS = '-v'
 TARGET = [
-    'apk --flutter-build-args="--target-platform=android-arm64" --flutter-build-args="--target-platform=android-arm"',
+    'apk',# --flutter-build-args="--target-platform=android-arm64" --flutter-build-args="--target-platform=android-arm"',
     # 'web'
 ]
 
