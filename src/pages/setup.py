@@ -8,6 +8,7 @@ from pages import Navigator
 from components.spinner import spinner_fulscreen
 
 from config import REPO_URL
+import logger
 
 def app_update_check(page: ft.Page):
     try:
@@ -35,15 +36,20 @@ def app_update_check(page: ft.Page):
 
 
 def login(page: ft.Page, force_update_condition: bool = False):
+    logger.log('setup.login', 'Инициализация хранилища')
     database = Storage.get() 
     print(len(database))
     page.vertical_alignment = ft.MainAxisAlignment.CENTER    
     # print(123, page.client_storage.get('date'))
     
+    logger.log('setup.login', 'Проверка условий обновления расписания')
+
     incorrect_date_condition = not page.client_storage.get('date')
     timeout_condition = incorrect_date_condition or (datetime.now() - datetime.strptime(page.client_storage.get('date'), '%d/%m/%Y, %H:%M:%S')).days > api.TIMEOUT # type: ignore | unreachable
     allowed_autoupdate_condition = not page.client_storage.get('ignore_timeout')
     
+    logger.warn('setup.login', f'{force_update_condition=}\n{incorrect_date_condition=}\n{timeout_condition=}\n{incorrect_date_condition=}')
+
     def setdate():
         page.client_storage.set('date', datetime.now().strftime('%d/%m/%Y, %H:%M:%S'))
     

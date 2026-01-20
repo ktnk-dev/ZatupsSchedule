@@ -18,7 +18,8 @@ def authorize() -> str:
 
 import json
 from storage import Storage
-    
+VISUAL_SEPARATOR = 4 # X => 1/X
+
 def cache(token: str) -> list[float]: #type: ignore
     enpoints = [
         'teachers', 'students/groups',
@@ -38,9 +39,14 @@ def cache(token: str) -> list[float]: #type: ignore
                 chunks.append(chunk)
                 downloaded += len(chunk)
                 if index != 3:
-                    yield ((downloaded/total_size)+index)/3 /4 #type: ignore
+                    yield ((downloaded/total_size)+index)/3 /VISUAL_SEPARATOR #type: ignore
                 else:
-                    yield min(0.99,((downloaded*0.75)/total_size)+0.25) #type: ignore
+                    yield min(0.99,
+                        (
+                            (downloaded * ((VISUAL_SEPARATOR-1)/VISUAL_SEPARATOR) )
+                            /total_size
+                        ) + (1/VISUAL_SEPARATOR)
+                    ) #type: ignore
             
             data = json.loads(b''.join(chunks))
             out.append(data)
