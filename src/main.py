@@ -7,7 +7,7 @@ from pages import (
     setup
 )
 import logger
-DEBUG = True
+DEBUG = False
 
 def main(page: ft.Page):
     logger.log('main', 'Приложение запущено')

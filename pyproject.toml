@@ -1,6 +1,6 @@
 [project]
 name = "buildv2"
-version = "0.3.3"
+version = "0.3.1"
 description = "Расписание ПГУПС"
 readme = "README.md"
 requires-python = ">=3.9"
